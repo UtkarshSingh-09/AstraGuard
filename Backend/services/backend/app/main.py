@@ -14,6 +14,7 @@ from app.api.routes_jobs import router as jobs_router
 from app.api.routes_onboard import router as onboard_router
 from app.api.routes_portfolio import router as portfolio_router
 from app.api.routes_tax import router as tax_router
+from app.api.routes_user import router as user_router
 from app.api.routes_ws import router as ws_router
 from app.core.config import settings
 from app.core.database import db_manager
@@ -45,6 +46,7 @@ app.include_router(arth_router)
 app.include_router(ws_router)
 app.include_router(ingestion_router)
 app.include_router(agent_lab_router)
+app.include_router(user_router)
 
 
 @app.get("/health")
