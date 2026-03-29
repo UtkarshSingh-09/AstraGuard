@@ -21,10 +21,14 @@ RUN apt-get update && apt-get install -y \
 COPY requirements.txt /app/requirements.txt
 COPY Backend/services/backend/requirements.txt /app/backend-requirements.txt
 
+# Install CPU-Only PyTorch first to prevent strict Resource Exhaustion (OOM killer)
+# Default pip pulls 3GB of Nvidia libraries which instantly kills standard cloud builders
+RUN pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu
+
 # Install python dependencies from both lists
 # (Ignoring versions to get latest pydantic resolution if there are mild conflicts)
 RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir -r /app/requirements.txt && \
+    pip install --no-cache-dir -r /app/requirements.txt --extra-index-url https://download.pytorch.org/whl/cpu && \
     pip install --no-cache-dir -r /app/backend-requirements.txt
 
 # Install casparser without dependencies to prevent pdfminer version looping errors
