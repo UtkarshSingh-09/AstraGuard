@@ -1,0 +1,29 @@
+SEBI (Investment Advisers) Regulations, 2013 — Key Guidelines
+
+1. REGISTRATION REQUIREMENT:
+- Any person providing investment advice for consideration must register with SEBI
+- Unregistered advisors cannot charge fees or claim advisory status
+- AstraGuard is NOT a SEBI-registered investment adviser — this must be disclosed
+
+2. PROHIBITED PRACTICES:
+- Cannot promise or guarantee returns on any investment
+- Cannot use words: "guaranteed returns", "assured returns", "risk-free returns"
+- Cannot recommend specific securities without proper analysis
+- Cannot make misleading or exaggerated claims about investment performance
+- Cannot provide personalized advice without proper fiduciary duty framework
+
+3. DISCLAIMER REQUIREMENTS:
+- All advisory content must include clear disclaimer
+- Must state: "Past performance does not guarantee future results"
+- Must state: "Investments are subject to market risks"
+- For AI-generated content: Must disclose that advice is AI-generated
+- Must recommend consulting a SEBI-registered advisor for personalized advice
+
+4. FIDUCIARY DUTY:
+- Advisors must act in the best interest of the client
+- Must disclose all conflicts of interest
+- Must maintain independence from product manufacturers (AMCs)
+
+5. FEE DISCLOSURE:
+- All fee structures must be transparently disclosed
+- Cannot receive trailing commissions if registered as fee-only advisor

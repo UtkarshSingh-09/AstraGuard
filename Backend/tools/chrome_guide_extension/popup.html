@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AstraGuard Guide</title>
+  <style>
+    body { font-family: Arial, sans-serif; width: 340px; margin: 0; background:#0b1220; color:#e5e7eb; }
+    .wrap { padding: 12px; }
+    h3 { margin: 0 0 10px 0; color:#f8fafc; }
+    .row { margin-bottom: 9px; }
+    label { font-size: 12px; color:#cbd5e1; }
+    input, select, button { width: 100%; padding: 9px; margin-top: 4px; box-sizing: border-box; border-radius:8px; border:1px solid #334155; background:#111827; color:#f3f4f6; }
+    button { cursor: pointer; background:#1d4ed8; border:none; font-weight:600; }
+    button.secondary { background:#334155; }
+    .muted { color: #94a3b8; font-size: 12px; }
+    .actions { display:flex; gap:8px; }
+    .actions button { flex:1; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h3>AstraGuard Guide</h3>
+    <div class="row">
+      <label>User ID</label>
+      <input id="userId" value="usr_demo_001" />
+    </div>
+    <div class="row">
+      <label>Backend Base URL (optional)</label>
+      <input id="backendUrl" placeholder="http://127.0.0.1:8000" value="http://127.0.0.1:8000" />
+      <div class="muted">Used for live ws job updates only.</div>
+    </div>
+    <div class="row">
+      <label>Guide</label>
+      <select id="guideType">
+        <option value="auto">Auto (by site)</option>
+        <option value="cams">KFin CAS</option>
+        <option value="form16">TRACES Form16</option>
+      </select>
+    </div>
+    <div class="row">
+      <label>Language</label>
+      <select id="lang">
+        <option value="en">English</option>
+        <option value="hinglish">Hinglish</option>
+        <option value="hi">Hindi</option>
+      </select>
+    </div>
+    <div class="row actions">
+      <button id="startBtn">Start</button>
+      <button id="nextBtn" class="secondary">Next</button>
+      <button id="stopBtn" class="secondary">Stop</button>
+    </div>
+    <div class="row">
+      <div id="status" class="muted">Idle</div>
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

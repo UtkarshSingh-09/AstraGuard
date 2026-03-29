@@ -1,0 +1,26 @@
+HRA Exemption Calculation Rules
+
+The HRA (House Rent Allowance) exemption is the MINIMUM of three conditions:
+
+1. Actual HRA received from employer
+2. Rent paid minus 10% of basic salary
+3. 50% of basic salary (metro cities: Delhi, Mumbai, Kolkata, Chennai) 
+   OR 40% of basic salary (non-metro cities)
+
+IMPORTANT NOTES:
+- If rent paid is ZERO, HRA exemption is ZERO (regardless of HRA received)
+- HRA exemption is available ONLY under OLD regime
+- Must have actual rent receipts or rental agreement as proof
+- Landlord PAN is mandatory if annual rent exceeds ₹1,00,000
+- Cannot claim both HRA exemption AND home loan interest Section 24(b) for the SAME city
+  (can claim both if HRA for rented house in work city and home loan for house in different city)
+
+COMMON MISTAKE:
+- Many employees receive HRA but don't pay rent → exemption = ₹0
+- Some claim full HRA as exemption → WRONG, must take minimum of 3 conditions
+
+Section 24(b) — Home Loan Interest:
+- Maximum deduction: ₹2,00,000 per year for self-occupied property
+- Available under OLD regime only
+- For let-out property: full interest deductible (no limit)
+- Both co-owners can claim ₹2L each on joint home loan

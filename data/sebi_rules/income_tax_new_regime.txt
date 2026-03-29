@@ -1,0 +1,30 @@
+Income Tax — New Regime Tax Slabs FY 2026-27
+
+1. NEW REGIME SLABS (Default regime from FY 2023-24):
+- ₹0 to ₹4,00,000: NIL (0%)
+- ₹4,00,001 to ₹8,00,000: 5%
+- ₹8,00,001 to ₹12,00,000: 10%
+- ₹12,00,001 to ₹16,00,000: 15%
+- ₹16,00,001 to ₹20,00,000: 20%
+- ₹20,00,001 to ₹24,00,000: 25%
+- Above ₹24,00,000: 30%
+
+2. STANDARD DEDUCTION: ₹75,000 (increased from ₹50,000 in Budget 2024)
+
+3. DEDUCTIONS ALLOWED IN NEW REGIME:
+- Standard deduction: ₹75,000
+- Employer's NPS contribution under Section 80CCD(2): up to 14% of salary
+- Agniveer contribution: Section 80CCH
+- Family pension deduction: ₹15,000 or 1/3rd of pension
+- NO 80C, 80D, HRA, 80TTA, 24(b) in new regime
+
+4. REBATE UNDER SECTION 87A:
+- Available if total income up to ₹7,00,000 (net of standard deduction)
+- Full tax rebate — effective tax = ZERO for income up to ₹7.75L approx
+
+5. HEALTH & EDUCATION CESS: 4% on total tax amount
+
+6. WHEN NEW REGIME IS BETTER:
+- If total deductions under old regime < ~₹3-4L
+- If salary is high with no HRA/home loan benefit
+- Salaried individuals with simple tax structure

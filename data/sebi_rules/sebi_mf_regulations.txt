@@ -1,0 +1,30 @@
+SEBI (Mutual Funds) Regulations — Key Rules for AstraGuard
+
+1. EXPENSE RATIO LIMITS (SEBI/HO/IMD/DF2/CIR/P/2018/137):
+- Maximum Total Expense Ratio (TER) for equity schemes: varies by AUM slab
+- First ₹500 Cr: max 2.25% (Regular), 1.25% less for Direct
+- Direct plans must have lower expense ratios than Regular plans
+- Exit load: max 2%, typically 1% for redemption within 1 year
+
+2. DIRECT vs REGULAR PLANS:
+- Direct plans do not pay distributor commissions
+- Expense ratio difference typically 0.5% to 1.5%
+- Over 10 years, this compounds significantly
+- Example: ₹10L invested, 1% expense difference = ₹1.6L+ loss over 10 years
+- SEBI mandates disclosure of both plan options
+
+3. INVESTOR PROTECTION:
+- AMCs must prominently display "Mutual fund investments are subject to market risks"
+- No guaranteed returns can be promised
+- Past performance is not indicative of future results
+- Risk-o-meter must be displayed for each scheme
+
+4. KYC REQUIREMENTS:
+- Mandatory KYC verification for investments above ₹50,000
+- PAN card mandatory for all mutual fund investments
+- SEBI-registered KRAs (KYC Registration Agencies) manage verification
+
+5. SIP REGULATIONS:
+- Minimum SIP amount varies by AMC (typically ₹500-₹1000)
+- SIP can be paused (not cancelled) in most schemes
+- No penalty for SIP pause, but lock-in applies for ELSS (3 years)

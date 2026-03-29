@@ -1,0 +1,31 @@
+Term Insurance — Adequacy Guidelines
+
+1. COVER CALCULATION (HUMAN LIFE VALUE METHOD):
+- Cover needed = Annual income × Years to retirement × Income replacement factor
+- Simple formula: Cover = Annual salary × (retirement age - current age) × 0.7
+- Alternatively: 10-15× annual income as thumb rule
+- Must consider: outstanding loans, dependents' future expenses, children's education
+
+2. ADDITIONAL FACTORS:
+- Outstanding home loan amount → add to cover
+- Children's education corpus → add ₹50L-₹1Cr per child
+- Spouse dependency → if non-earning, factor living expenses until their life expectancy
+- Existing group insurance from employer → subtract from needed cover
+- Other life insurance policies → subtract from needed cover
+
+3. PREMIUM GUIDELINES:
+- Buy ONLINE term plan (cheapest, direct from insurer)
+- Premium typically 0.2-0.5% of cover for age 25-35
+- Example: ₹1 Cr cover at age 30 ≈ ₹8,000-₹12,000/year
+- Premium increases sharply after age 40 — buy early
+
+4. IMPORTANT NOTES:
+- ONLY term insurance recommended for cover — NOT ULIP, endowment, money-back
+- ULIPs and endowment plans are investment + insurance hybrid → poor at both
+- Term plan = pure protection at lowest cost
+- Riders: Critical illness rider worth considering, accident rider optional
+- Must disclose: We are not insurance advisors, consult IRDAI-registered agent
+
+5. TAX BENEFIT:
+- Premium paid qualifies under Section 80C (up to ₹1.5L combined limit)
+- Death benefit is tax-free under Section 10(10D) for nominee

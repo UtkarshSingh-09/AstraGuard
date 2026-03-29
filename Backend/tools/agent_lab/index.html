@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AstraGuard Agent Lab</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 24px; background: #0b1220; color: #f3f4f6; }
+    h1 { margin-bottom: 8px; }
+    .row { display: flex; gap: 16px; flex-wrap: wrap; }
+    .card { background: #111827; padding: 16px; border-radius: 10px; width: 460px; }
+    input, select, button, textarea { width: 100%; margin: 6px 0; padding: 8px; border-radius: 6px; border: 1px solid #374151; background:#0f172a; color:#f3f4f6; }
+    button { cursor: pointer; background: #1d4ed8; border: none; }
+    .muted { color: #9ca3af; font-size: 13px; }
+    pre { background: #020617; padding: 10px; border-radius: 8px; max-height: 220px; overflow: auto; }
+    a { color: #93c5fd; }
+    .ok { color:#34d399; }
+    .warn { color:#f59e0b; }
+    .timeline { background:#020617; border-radius:8px; padding:10px; min-height:70px; max-height:140px; overflow:auto; margin:8px 0; font-size:13px; }
+    .timeline-item { padding:4px 0; border-bottom:1px dashed #1f2937; }
+    .timeline-item:last-child { border-bottom:none; }
+    .evidence { margin-top:8px; font-size:13px; line-height:1.5; }
+  </style>
+</head>
+<body>
+  <h1>AstraGuard Agent Lab</h1>
+  <p class="muted">Temporary harness for CAMS/Form16 background agents with polling and user-step continuation.</p>
+
+  <div class="row">
+    <div class="card">
+      <h3>CAMS Agent</h3>
+      <input id="camsUser" placeholder="user_id" value="usr_demo_001" />
+      <input id="camsPan" placeholder="PAN" value="ABCDE1234F" />
+      <input id="camsEmail" placeholder="Email" value="demo@example.com" />
+      <input id="camsMailPass" placeholder="Mailbox App Password (optional for auto-ingest)" />
+      <label><input id="camsAutoIngest" type="checkbox" /> auto_ingest_mailbox</label>
+      <select id="camsMode">
+        <option value="mock">mock</option>
+        <option value="real">real</option>
+      </select>
+      <button onclick="startCams()">Start CAMS Agent</button>
+      <input id="camsJobId" placeholder="job_id" />
+      <button onclick="poll('camsJobId')">Poll Job</button>
+      <div class="muted" id="camsLive">Live updates: idle</div>
+      <div class="timeline" id="camsTimeline"></div>
+      <pre id="camsOut"></pre>
+      <div class="evidence" id="camsEvidence"></div>
+    </div>
+
+    <div class="card">
+      <h3>Form16 Agent</h3>
+      <input id="fUser" placeholder="user_id" value="usr_demo_001" />
+      <input id="fUsername" placeholder="portal username" value="demo_user" />
+      <input id="fPassword" placeholder="portal password" value="demo_pass" />
+      <select id="fMode">
+        <option value="assisted">assisted</option>
+        <option value="mock">mock</option>
+      </select>
+      <button onclick="startForm16()">Start Form16 Agent</button>
+      <input id="fJobId" placeholder="job_id" />
+      <button onclick="poll('fJobId')">Poll Job</button>
+      <div class="muted" id="fLive">Live updates: idle</div>
+      <div class="timeline" id="fTimeline"></div>
+      <select id="stepType">
+        <option value="otp">otp</option>
+        <option value="captcha">captcha</option>
+        <option value="mfa_code">mfa_code</option>
+      </select>
+      <input id="stepValue" placeholder="step value" value="123456" />
+      <button onclick="submitStep()">Submit User Step</button>
+      <pre id="fOut"></pre>
+      <div class="evidence" id="fEvidence"></div>
+    </div>
+  </div>
+
+  <script>
+    const stateCache = { cams: { status: null }, form16: { status: null } };
+    const jobWatch = {};
+    let ws = null;
+    let wsConnected = false;
+    let fallbackInterval = null;
+
+    function nowTime() {
+      return new Date().toLocaleTimeString();
+    }
+
+    function setLive(liveId, status) {
+      const el = document.getElementById(liveId);
+      if (status === 'awaiting_user_step') {
+        el.innerHTML = '<span class="warn">Live updates: awaiting_user_step (user input required)</span>';
+      } else if (status === 'complete') {
+        el.innerHTML = '<span class="ok">Live updates: complete</span>';
+      } else if (status === 'failed') {
+        el.innerHTML = '<span class="warn">Live updates: failed</span>';
+      } else {
+        el.textContent = `Live updates: ${status}`;
+      }
+    }
+
+    function appendTimeline(timelineId, status, message) {
+      const tl = document.getElementById(timelineId);
+      const item = document.createElement('div');
+      item.className = 'timeline-item';
+      item.textContent = `[${nowTime()}] ${status} - ${message || ''}`;
+      tl.prepend(item);
+    }
+
+    function renderEvidence(evidenceId, data) {
+      const box = document.getElementById(evidenceId);
+      const result = data.result || {};
+      const evidence = result.evidence || {};
+      const links = (evidence.screenshots || [])
+        .map((u) => `<a href="${u}" target="_blank" rel="noreferrer">${u}</a>`)
+        .join('<br/>');
+      box.innerHTML = links ? `Screenshots:<br/>${links}` : '';
+    }
+
+    function renderOutput(outId, data) {
+      document.getElementById(outId).textContent = JSON.stringify(data, null, 2);
+    }
+
+    function ensureWS(userId) {
+      if (!userId || (ws && (ws.readyState === WebSocket.OPEN || ws.readyState === WebSocket.CONNECTING))) return;
+      ws = new WebSocket(`ws://${location.host}/ws/${userId}`);
+      ws.onopen = function () {
+        wsConnected = true;
+        if (fallbackInterval) {
+          clearInterval(fallbackInterval);
+          fallbackInterval = null;
+        }
+      };
+      ws.onmessage = function (e) {
+        try {
+          const event = JSON.parse(e.data);
+          if (event.type !== 'job_update' || !event.data) return;
+          const payload = event.data;
+          const watch = jobWatch[payload.job_id];
+          if (!watch) return;
+          const wrapped = {
+            status: payload.job_status === 'complete' ? 'success' : 'processing',
+            job_id: payload.job_id,
+            job_status: payload.job_status,
+            message: payload.message,
+            result: payload.result || null,
+            error: payload.error || null
+          };
+          renderOutput(watch.outId, wrapped);
+          renderEvidence(watch.evidenceId, wrapped);
+          const status = String(payload.job_status || '').toLowerCase();
+          if (stateCache[watch.cacheKey].status !== status) {
+            stateCache[watch.cacheKey].status = status;
+            setLive(watch.liveId, status);
+            appendTimeline(watch.timelineId, status, payload.message || '');
+          }
+        } catch (_) {}
+      };
+      ws.onerror = function () {
+        wsConnected = false;
+        startFallbackPolling();
+      };
+      ws.onclose = function () {
+        wsConnected = false;
+        startFallbackPolling();
+      };
+    }
+
+    function watchJob(cacheKey, jobId, outId, liveId, timelineId, evidenceId) {
+      jobWatch[jobId] = { cacheKey, outId, liveId, timelineId, evidenceId };
+      setLive(liveId, 'running');
+      appendTimeline(timelineId, 'queued', 'Job registered for live tracking');
+      startFallbackPolling();
+    }
+
+    function startFallbackPolling() {
+      if (fallbackInterval || wsConnected) return;
+      fallbackInterval = setInterval(async () => {
+        const entries = Object.entries(jobWatch);
+        for (const [jobId, watch] of entries) {
+          const res = await fetch('/api/jobs/' + jobId);
+          const data = await res.json();
+          renderOutput(watch.outId, data);
+          renderEvidence(watch.evidenceId, data);
+          const status = String(data.job_status || '').toLowerCase();
+          if (status && status !== stateCache[watch.cacheKey].status) {
+            stateCache[watch.cacheKey].status = status;
+            setLive(watch.liveId, status);
+            appendTimeline(watch.timelineId, status, data.message || '');
+          }
+          if (['complete', 'failed'].includes(status)) {
+            delete jobWatch[jobId];
+          }
+        }
+        if (Object.keys(jobWatch).length === 0) {
+          clearInterval(fallbackInterval);
+          fallbackInterval = null;
+        }
+      }, 4000);
+    }
+
+    async function startCams() {
+      const payload = {
+        user_id: document.getElementById('camsUser').value,
+        pan: document.getElementById('camsPan').value,
+        email: document.getElementById('camsEmail').value,
+        mode: document.getElementById('camsMode').value,
+        auto_ingest_mailbox: document.getElementById('camsAutoIngest').checked
+      };
+      const mp = document.getElementById('camsMailPass').value;
+      if (mp) payload.mailbox_app_password = mp;
+      const res = await fetch('/api/cams/agent/start', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+      const data = await res.json();
+      document.getElementById('camsJobId').value = data.job_id || '';
+      renderOutput('camsOut', data);
+      ensureWS(payload.user_id);
+      if (data.job_id) watchJob('cams', data.job_id, 'camsOut', 'camsLive', 'camsTimeline', 'camsEvidence');
+    }
+
+    async function startForm16() {
+      const payload = {
+        user_id: document.getElementById('fUser').value,
+        username: document.getElementById('fUsername').value,
+        password: document.getElementById('fPassword').value,
+        mode: document.getElementById('fMode').value
+      };
+      const res = await fetch('/api/form16/agent/start', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+      const data = await res.json();
+      document.getElementById('fJobId').value = data.job_id || '';
+      renderOutput('fOut', data);
+      ensureWS(payload.user_id);
+      if (data.job_id) watchJob('form16', data.job_id, 'fOut', 'fLive', 'fTimeline', 'fEvidence');
+    }
+
+    async function poll(idField) {
+      const jobId = document.getElementById(idField).value;
+      if (!jobId) return;
+      const res = await fetch('/api/jobs/' + jobId);
+      const data = await res.json();
+      const outId = idField === 'camsJobId' ? 'camsOut' : 'fOut';
+      const evId = idField === 'camsJobId' ? 'camsEvidence' : 'fEvidence';
+      renderOutput(outId, data);
+      renderEvidence(evId, data);
+    }
+
+    async function submitStep() {
+      const jobId = document.getElementById('fJobId').value;
+      if (!jobId) return;
+      const payload = {
+        step_type: document.getElementById('stepType').value,
+        value: document.getElementById('stepValue').value
+      };
+      const res = await fetch('/api/jobs/' + jobId + '/user-step', {
+        method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      renderOutput('fOut', data);
+    }
+  </script>
+</body>
+</html>

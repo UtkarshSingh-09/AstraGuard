@@ -1,0 +1,27 @@
+Income Tax — Old Regime Tax Slabs FY 2026-27
+
+1. OLD REGIME SLABS:
+- ₹0 to ₹3,00,000: NIL (0%)
+- ₹3,00,001 to ₹7,00,000: 5%
+- ₹7,00,001 to ₹10,00,000: 10%
+- ₹10,00,001 to ₹12,00,000: 15%
+- ₹12,00,001 to ₹15,00,000: 20%
+- Above ₹15,00,000: 30%
+
+2. STANDARD DEDUCTION: ₹50,000
+
+3. DEDUCTIONS AVAILABLE:
+- Section 80C: ₹1,50,000 (ELSS, PPF, EPF, NSC, etc.)
+- Section 80CCD(1B): ₹50,000 additional NPS
+- Section 80D: Health insurance (₹25,000 self, ₹25,000/₹50,000 parents)
+- Section 24(b): Home loan interest up to ₹2,00,000
+- Section 80TTA: Savings account interest up to ₹10,000
+- HRA Exemption: Minimum of (actual HRA, 50%/40% of salary, rent - 10% salary)
+
+4. HEALTH & EDUCATION CESS: 4% on total tax amount
+
+5. WHEN OLD REGIME IS BETTER:
+- If total deductions exceed ₹3-4L
+- If claiming HRA + home loan interest
+- If maximizing 80C + 80D + 80CCD(1B)
+- Typically better for higher income with full deduction utilization

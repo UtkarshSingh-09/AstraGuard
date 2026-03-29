@@ -1,0 +1,33 @@
+Capital Gains Tax — LTCG and STCG Rules (FY 2026-27)
+
+1. EQUITY MUTUAL FUNDS & STOCKS:
+
+SHORT-TERM CAPITAL GAINS (STCG):
+- Holding period: Less than 12 months (1 year)
+- Tax rate: 20% (increased from 15% in Budget 2024)
+- No exemption limit for STCG
+- Applicable on: Equity MF, stocks, equity-oriented hybrid funds
+
+LONG-TERM CAPITAL GAINS (LTCG):
+- Holding period: 12 months or more
+- Tax rate: 12.5% (increased from 10% in Budget 2024)
+- Exemption: First ₹1,25,000 of LTCG per year is TAX-FREE
+- Applicable on: Equity MF, stocks listed on recognized exchange
+- Indexation benefit removed from Budget 2024
+
+2. DEBT MUTUAL FUNDS:
+- All gains taxed as per income tax slab (no special rate)
+- No distinction between short-term and long-term
+- This changed from April 2023 — earlier had indexation benefit
+
+3. REBALANCING TAX IMPLICATIONS:
+- Selling equity MF within 1 year = 20% STCG tax on gains
+- Selling equity MF after 1 year = 12.5% LTCG (above ₹1.25L exemption)
+- ALWAYS check holding period before recommending fund exits
+- If fund exit triggers STCG, recommend waiting for LTCG threshold
+
+4. TAX HARVESTING:
+- Can book ₹1.25L LTCG each year tax-free
+- Reinvest immediately in same or different fund
+- Effective way to reduce future tax liability
+- STCG harvesting rarely beneficial due to 20% rate

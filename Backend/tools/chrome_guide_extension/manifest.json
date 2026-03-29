@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "AstraGuard Site Guide",
+  "version": "0.1.0",
+  "description": "Step-by-step guided assistant for CAMS and TRACES/Form16 portals.",
+  "permissions": ["activeTab", "storage", "scripting", "tabs"],
+  "host_permissions": [
+    "http://mfs.kfintech.com/*",
+    "https://mfs.kfintech.com/*",
+    "http://www.tdscpc.gov.in/*",
+    "https://www.tdscpc.gov.in/*",
+    "http://*.tdscpc.gov.in/*",
+    "https://*.tdscpc.gov.in/*"
+  ],
+  "action": {
+    "default_title": "AstraGuard Guide",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://mfs.kfintech.com/*",
+        "https://mfs.kfintech.com/*",
+        "http://www.tdscpc.gov.in/*",
+        "https://www.tdscpc.gov.in/*",
+        "http://*.tdscpc.gov.in/*",
+        "https://*.tdscpc.gov.in/*"
+      ],
+      "js": ["content.js"],
+      "css": ["styles.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}

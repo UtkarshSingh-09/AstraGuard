@@ -1,0 +1,36 @@
+SEBI — Return Claims and Assumptions Guidelines
+
+1. PROHIBITED CLAIMS:
+- "Guaranteed returns" — strictly prohibited
+- "Assured returns" — prohibited  
+- "Risk-free investment" — prohibited
+- "Sure shot profit" — prohibited
+- "Double your money" — prohibited unless government scheme with fixed maturity
+- "Zero risk" — no investment is zero risk
+
+2. REASONABLE RETURN ASSUMPTIONS:
+- Historical Nifty50 CAGR: approximately 12-13% over 20+ years
+- Conservative equity assumption: 10-12% CAGR
+- Moderate equity assumption: 12% CAGR  
+- Aggressive equity assumption: 13% CAGR (should not exceed this)
+- Using >13% equity return = UNREALISTIC and potentially misleading
+- Debt returns: 6-7.5% range is reasonable
+- Using >8% debt return = questionable
+
+3. INFLATION ASSUMPTIONS:
+- Historical CPI inflation India: 5-7% average
+- Reasonable range: 5-7% for planning
+- Conservative: 6% is widely used standard
+- Using <4% inflation = potentially misleading (too optimistic)
+- Using >8% inflation = potentially misleading (too pessimistic)
+
+4. SAFE WITHDRAWAL RATE:
+- The "4% rule" is a guideline, not a guarantee
+- India-specific: some experts recommend 3-3.5% due to higher inflation
+- Must be presented as a guideline with disclaimer
+- Example disclaimer: "Based on historical data. Actual results may vary."
+
+5. SEBI MANDATED DISCLAIMERS:
+- "Mutual fund investments are subject to market risks. Read all scheme related documents carefully."
+- "Past performance is not indicative of future results."
+- Must be displayed prominently, not buried in fine print

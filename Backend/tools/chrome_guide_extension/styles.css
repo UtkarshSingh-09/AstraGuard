@@ -1,0 +1,78 @@
+#astra-guide-overlay {
+  position: fixed;
+  right: 16px;
+  top: 16px;
+  width: 320px;
+  z-index: 2147483647;
+  background: linear-gradient(180deg, #0b1220 0%, #0f172a 100%);
+  color: #f8fafc;
+  border: 1px solid #334155;
+  border-radius: 10px;
+  padding: 12px;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+.astra-guide-header {
+  font-weight: 700;
+  margin-bottom: 8px;
+  letter-spacing: 0.2px;
+}
+
+#astra-guide-body {
+  font-size: 13px;
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+
+#astra-guide-meta {
+  font-size: 12px;
+  color: #93c5fd;
+  margin-bottom: 10px;
+}
+
+.astra-guide-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.astra-guide-actions button {
+  border: none;
+  border-radius: 6px;
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+.astra-guide-actions button:first-child {
+  background: #1d4ed8;
+  color: #fff;
+}
+
+.astra-guide-actions button:last-child {
+  background: #334155;
+  color: #fff;
+}
+
+.astra-guide-highlight {
+  outline: 3px solid #f59e0b !important;
+  outline-offset: 2px !important;
+  animation: astra-pulse 1.2s ease-in-out infinite;
+}
+
+.astra-guide-tooltip {
+  position: absolute;
+  z-index: 2147483647;
+  background: #111827;
+  color: #fff;
+  border: 1px solid #374151;
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-size: 12px;
+  max-width: 280px;
+}
+
+@keyframes astra-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.5); }
+  70% { box-shadow: 0 0 0 10px rgba(245, 158, 11, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+}

@@ -1,0 +1,11 @@
+venv/
+.venv/
+__pycache__/
+*.pyc
+.env
+.pytest_cache/
+Backend/services/backend/chroma_data/
+chroma_data/
+.DS_Store
+*.pdf
+logs/
