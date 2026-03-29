@@ -34,7 +34,12 @@ logger = logging.getLogger("astraguard.agents.orchestrator")
 # ═══════════════════════════════════════════════════════════════════════
 
 async def detect_intent_node(state: AstraGuardState) -> dict:
-    """Detect user intent using llama3-8b."""
+    """Detect user intent using llama3-8b, or use pre-populated state intent."""
+    
+    if state.get("intent"):
+        logger.info(f"Bypassing LLM detection, intent forced to: {state.get('intent')}")
+        return {"intent": state.get("intent"), "current_agent": state.get("intent")}
+
     message = state.get("current_message", "")
     conversation = state.get("conversation_history", [])
 
@@ -475,6 +480,7 @@ async def run_orchestrator(
     calculation_result: dict | None = None,
     literacy_scores: dict | None = None,
     intervention_data: dict | None = None,
+    force_intent: str | None = None,
 ) -> dict:
     """
     Main entry point — run a user message through the full agent pipeline.
@@ -508,7 +514,7 @@ async def run_orchestrator(
         "literacy_scores": literacy_scores,
         "intervention_data": intervention_data,
         "messages": [],
-        "intent": "",
+        "intent": force_intent or "",
         "sub_intent": "",
         "current_agent": "",
         "narration": None,

@@ -40,6 +40,7 @@ async def onboard(request: OnboardRequest):
         conversation_history=request.conversation_history,
         financial_dna=user.get("financial_dna") if user else None,
         behavioral_dna=user.get("behavioral_dna") if user else None,
+        force_intent="onboard",
     )
 
     extracted_so_far = response.get("extracted_so_far", {})
